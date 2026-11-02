@@ -1,319 +1,224 @@
-f<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10090c">
+  <meta name="theme-color" content="#090909">
   <meta name="description" content="Hamza Bahaeldin - Personal Profile">
-  <title>Hamza Bahaeldin | Personal Profile</title>
+
+  <title>Hamza Bahaeldin | Profile</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --red: #ed1745;
-      --red-light: #ff4568;
-      --bg: #10090c;
-      --glass: rgba(255,255,255,.055);
-      --border: rgba(255,255,255,.12);
-      --text: #fff;
-      --muted: #a99ba0;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    :root {
+      --bg: #080808;
+      --red: #e63946;
+      --white: #f5f5f5;
+      --muted: #929292;
+      --glass: rgba(255,255,255,0.045);
+      --border: rgba(255,255,255,0.10);
     }
 
     body {
       min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
       background:
-        radial-gradient(ellipse at 50% 10%, rgba(237,23,69,.22), transparent 45%),
-        radial-gradient(circle at 10% 85%, rgba(237,23,69,.12), transparent 30%),
+        radial-gradient(ellipse at 50% 15%, rgba(230,57,70,0.13), transparent 42%),
         var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow-x: hidden;
       padding: 35px 18px;
-    }
-
-    .glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(237,23,69,.12);
-      filter: blur(100px);
-      pointer-events: none;
-      animation: float 8s ease-in-out infinite alternate;
-    }
-
-    .glow.one {
-      top: -100px;
-      left: -100px;
-    }
-
-    .glow.two {
-      bottom: -120px;
-      right: -100px;
-      animation-delay: 2s;
-    }
-
-    @keyframes float {
-      from { transform: translate(0,0) scale(1); }
-      to { transform: translate(50px,35px) scale(1.25); }
+      overflow-x: hidden;
     }
 
     .container {
-      position: relative;
-      z-index: 2;
       width: 100%;
-      max-width: 430px;
+      max-width: 410px;
       text-align: center;
       animation: appear 1s ease both;
     }
 
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .profile-wrap {
-      position: relative;
-      width: 158px;
-      height: 158px;
-      margin: 0 auto 25px;
-    }
-
-    .profile-ring {
-      position: absolute;
-      inset: -7px;
-      border: 1px solid rgba(255,69,104,.65);
-      border-radius: 50%;
-      box-shadow: 0 0 25px rgba(237,23,69,.28);
-      animation: pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { transform: scale(1); opacity: .7; }
-      50% { transform: scale(1.07); opacity: 1; }
-    }
-
-    .profile {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #211117;
-      background: #211117;
-      display: block;
-    }
-
-    .status {
+    .top-label {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #e7dce0;
-      font-size: 11px;
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      border-radius: 30px;
+      color: #c8c8c8;
+      font-size: 10px;
       letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(15px);
     }
 
     .status-dot {
       width: 7px;
       height: 7px;
+      background: #55d68b;
       border-radius: 50%;
-      background: #ff315d;
-      box-shadow: 0 0 12px #ff315d;
+      box-shadow: 0 0 10px #55d68b;
+    }
+
+    .avatar-wrap {
+      width: 142px;
+      height: 142px;
+      margin: 0 auto 22px;
+      padding: 5px;
+      border: 1px solid rgba(230,57,70,0.65);
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(230,57,70,0.12);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: #171717;
     }
 
     h1 {
-      font-size: clamp(29px, 8vw, 36px);
+      font-size: clamp(27px, 7vw, 34px);
       font-weight: 800;
       letter-spacing: -1.5px;
-      margin-bottom: 10px;
-    }
-
-    h1 span {
-      color: var(--red-light);
+      margin-bottom: 9px;
     }
 
     .subtitle {
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 30px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 19px;
     }
 
-    .divider {
-      width: 45px;
-      height: 3px;
-      border-radius: 10px;
-      background: var(--red);
-      margin: 0 auto 27px;
-      box-shadow: 0 0 15px rgba(237,23,69,.7);
+    .bio {
+      color: #b8b8b8;
+      font-size: 13px;
+      line-height: 1.8;
+      max-width: 300px;
+      margin: 0 auto 30px;
     }
 
     .links {
       display: flex;
       flex-direction: column;
-      gap: 13px;
+      gap: 12px;
     }
 
-    .social-link {
+    .link {
       position: relative;
       display: flex;
       align-items: center;
-      gap: 15px;
-      padding: 16px 18px;
-      min-height: 68px;
-      text-decoration: none;
-      color: white;
-      text-align: left;
+      justify-content: center;
+      min-height: 59px;
+      padding: 15px 20px;
       border: 1px solid var(--border);
-      border-radius: 17px;
-      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+      border-radius: 15px;
+      background: var(--glass);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
       backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      transition: 0.25s ease;
       overflow: hidden;
-      transition: .3s ease;
-      animation: slideUp .7s ease both;
     }
 
-    .social-link:nth-child(2) { animation-delay: .12s; }
-    .social-link:nth-child(3) { animation-delay: .24s; }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
+    .link:hover {
+      border-color: rgba(230,57,70,0.65);
+      background: rgba(230,57,70,0.10);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(230,57,70,0.08);
     }
 
-    .social-link::before {
-      content: "";
+    .link:active {
+      transform: scale(0.98);
+    }
+
+    .link-icon {
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 70%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
-      transform: skewX(-20deg);
-      transition: .6s;
-    }
-
-    .social-link:hover::before {
-      left: 130%;
-    }
-
-    .social-link:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,69,104,.65);
-      box-shadow: 0 12px 35px rgba(237,23,69,.15);
-      background: rgba(237,23,69,.09);
-    }
-
-    .icon-box {
-      width: 42px;
-      height: 42px;
+      left: 19px;
+      width: 20px;
+      height: 20px;
       display: grid;
       place-items: center;
-      flex-shrink: 0;
-      border-radius: 13px;
-      background: rgba(237,23,69,.13);
-      color: #ff5878;
+      color: #e8e8e8;
     }
 
-    .icon-box svg {
-      width: 21px;
-      height: 21px;
-      stroke: currentColor;
+    .link-icon svg {
+      width: 19px;
+      height: 19px;
       fill: none;
-      stroke-width: 1.8;
+      stroke: currentColor;
+      stroke-width: 1.7;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
-    .link-info {
-      flex: 1;
-    }
-
-    .link-title {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .link-description {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .arrow {
-      color: #8f7c83;
-      font-size: 18px;
-      transition: .3s;
-    }
-
-    .social-link:hover .arrow {
-      color: var(--red-light);
-      transform: translateX(4px);
-    }
-
     .footer {
-      margin-top: 30px;
-      color: #796b70;
+      margin-top: 35px;
+      color: #626262;
       font-size: 10px;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
     }
 
-    .footer strong {
-      color: #c4aeb5;
-      font-weight: 600;
+    .footer span {
+      color: var(--red);
     }
 
-    .click-ripple {
-      position: absolute;
+    .click-effect {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--red);
       border-radius: 50%;
-      background: rgba(255,69,104,.25);
-      transform: scale(0);
-      animation: ripple .55s ease-out forwards;
       pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: ripple 0.55s ease-out forwards;
+      z-index: 99;
     }
 
     @keyframes ripple {
       to {
-        transform: scale(5);
+        width: 65px;
+        height: 65px;
         opacity: 0;
       }
     }
 
-    @media (max-width: 380px) {
-      .profile-wrap {
-        width: 135px;
-        height: 135px;
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
       }
-      .social-link {
-        padding: 14px;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+    @media (max-width: 380px) {
+      .avatar-wrap {
+        width: 125px;
+        height: 125px;
+      }
+      .link {
+        min-height: 55px;
       }
     }
   </style>
@@ -321,154 +226,125 @@ f<!DOCTYPE html>
 
 <body>
 
-  <div class="glow one"></div>
-  <div class="glow two"></div>
-
   <main class="container">
 
-    <div class="profile-wrap">
-      <div class="profile-ring"></div>
-      <img class="profile" src="profile.png.png" alt="Hamza Bahaeldin">
-    </div>
-
-    <div class="status">
+    <div class="top-label">
       <span class="status-dot"></span>
       PERSONAL PROFILE
     </div>
 
-    <h1>Hamza <span>Bahaeldin</span></h1>
+    <div class="avatar-wrap">
+      <img
+        class="avatar"
+        src="profile.png.png"
+        alt="Hamza Bahaeldin"
+      >
+    </div>
 
-    <p class="subtitle">
-      Welcome to my personal space.<br>
-      Connect with me through my social platforms.
+    <h1>Hamza Bahaeldin</h1>
+
+    <p class="subtitle">Entrepreneur & Digital Business</p>
+
+    <p class="bio">
+      Building ideas into reality.
+      Focused on business, technology and creating new opportunities.
     </p>
 
-    <div class="divider"></div>
+    <div class="links">
 
-    <section class="links" aria-label="Social media links">
-
-      <!-- Instagram -->
-      <a class="social-link"
+      <a class="link"
          href="https://www.instagram.com/hamza_bahaeldin?exln=MTZ4bjR6aWsycGF1OA=="
-         target="_blank" rel="noopener noreferrer">
-
-        <div class="icon-box">
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="link-icon">
           <svg viewBox="0 0 24 24">
             <rect x="3" y="3" width="18" height="18" rx="5"/>
             <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>
+            <circle cx="18" cy="6" r="0.8"/>
           </svg>
-        </div>
-
-        <div class="link-info">
-          <span class="link-title">Instagram</span>
-          <span class="link-description">@hamza_bahaeldin</span>
-        </div>
-
-        <span class="arrow">↗</span>
+        </span>
+        Instagram
       </a>
 
-      <!-- Snapchat -->
-      <a class="social-link"
+      <a class="link"
          href="https://www.snapchat.com/add/ebrezz?share_id=T6WGyzLw8II&locale=ar-EG-u-nu-arab"
-         target="_blank" rel="noopener noreferrer">
-
-        <div class="icon-box">
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="link-icon">
           <svg viewBox="0 0 24 24">
-            <path d="M12 3c-2.5 0-4 1.8-4 4.5v2.2c0 .7-.4 1.1-1 1.1-.5 0-1-.3-1.5-.3-.6 0-1 .4-1 1 0 .7.8 1.1 1.7 1.3.7.2 1 .6.7 1.2-.5 1-1.5 1.8-2.8 2.3-.5.2-.8.6-.6 1 .2.5.9.6 1.5.7.5.1 1 .2 1.3.6.3.4.4.8 1 .8.6 0 1.2-.3 2-.3.8 0 1.8.5 2.7.5s1.9-.5 2.7-.5c.8 0 1.4.3 2 .3.6 0 .7-.4 1-.8.3-.4.8-.5 1.3-.6.6-.1 1.3-.2 1.5-.7.2-.4-.1-.8-.6-1-1.3-.5-2.3-1.3-2.8-2.3-.3-.6 0-1 .7-1.2.9-.2 1.7-.6 1.7-1.3 0-.6-.4-1-1-1-.5 0-1 .3-1.5.3-.6 0-1-.4-1-1.1V7.5C16 4.8 14.5 3 12 3Z"/>
+            <path d="M12 3c-3 0-4.5 2.2-4.5 5v3c0 1-.8 1.7-2 2-.7.2-1.4.3-2 .7 0 .7 1.7 1.2 2.5 1.4.5.2.7.8 1 1.3.4.8 1.2 1.3 2.2 1.3 1.1 0 1.7.5 2.8.5s1.7-.5 2.8-.5c1 0 1.8-.5 2.2-1.3.3-.5.5-1.1 1-1.3.8-.2 2.5-.7 2.5-1.4-.6-.4-1.3-.5-2-.7-1.2-.3-2-.9-2-2V8c0-2.8-1.5-5-4.5-5z"/>
           </svg>
-        </div>
-
-        <div class="link-info">
-          <span class="link-title">Snapchat</span>
-          <span class="link-description">@ebrezz</span>
-        </div>
-
-        <span class="arrow">↗</span>
+        </span>
+        Snapchat
       </a>
 
-      <!-- WhatsApp -->
-      <a class="social-link"
+      <a class="link"
          href="https://wa.me/249123600477"
-         target="_blank" rel="noopener noreferrer">
-
-        <div class="icon-box">
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="link-icon">
           <svg viewBox="0 0 24 24">
-            <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.7a8.5 8.5 0 1 1 16.3-3.8Z"/>
-            <path d="M8.5 8.5c.3-.6.6-.6 1-.6.2 0 .4 0 .6.5l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.5.9 1.2 1.6 2.1 2.1.3.2.5.2.7 0l.7-.8c.2-.2.4-.2.7-.1l1.7.8c.4.2.5.3.5.6 0 .4-.2.9-.6 1.2-.5.5-1.3.6-2.1.4-1.1-.3-2.4-1-3.6-2.2-1.2-1.2-1.9-2.5-2.2-3.6-.2-.8-.1-1.6.4-2.2Z"/>
+            <path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/>
+            <path d="M9 9c.5 2 2 3.5 4 4l1-1 2 1c-.3 1.5-1.5 2-3 1.5-2.5-1-4.5-3-5-5.5-.3-1.5.5-2.5 2-2.5l1 2z"/>
           </svg>
-        </div>
-
-        <div class="link-info">
-          <span class="link-title">WhatsApp</span>
-          <span class="link-description">Let's talk together</span>
-        </div>
-
-        <span class="arrow">↗</span>
+        </span>
+        WhatsApp
       </a>
 
-    </section>
+    </div>
 
-    <footer class="footer">
-      © 2026 <strong>HAMZA BAHAELDIN</strong><br>
-      PERSONAL PROFILE
-    </footer>
+    <div class="footer">
+      DESIGNED WITH <span>♥</span> BY HAMZA
+    </div>
 
   </main>
 
   <script>
-    // A subtle sound generated when a social link is clicked.
-    // Browsers allow this because it starts from a user interaction.
-    let audioContext;
-
+    // Simple click sound
     function playClickSound() {
       try {
-        audioContext = audioContext || new (
-          window.AudioContext || window.webkitAudioContext
-        )();
+        const AudioContext =
+          window.AudioContext || window.webkitAudioContext;
 
-        if (audioContext.state === "suspended") {
-          audioContext.resume();
-        }
-
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
+        const audio = new AudioContext();
+        const oscillator = audio.createOscillator();
+        const gain = audio.createGain();
 
         oscillator.type = "sine";
-        oscillator.frequency.setValueAtTime(620, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(520, audio.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(
-          360, audioContext.currentTime + 0.08
+          220, audio.currentTime + 0.09
         );
 
-        gain.gain.setValueAtTime(0.055, audioContext.currentTime);
+        gain.gain.setValueAtTime(0.045, audio.currentTime);
         gain.gain.exponentialRampToValueAtTime(
-          0.001, audioContext.currentTime + 0.11
+          0.001, audio.currentTime + 0.1
         );
 
         oscillator.connect(gain);
-        gain.connect(audioContext.destination);
+        gain.connect(audio.destination);
 
         oscillator.start();
-        oscillator.stop(audioContext.currentTime + 0.12);
+        oscillator.stop(audio.currentTime + 0.1);
+
+        oscillator.onended = () => audio.close();
       } catch (error) {
-        // The links still work if audio is unavailable.
+        // Sound is optional
       }
     }
 
-    document.querySelectorAll(".social-link").forEach(link => {
-      link.addEventListener("click", function(event) {
+    // Click ripple and sound
+    document.querySelectorAll(".link").forEach(link => {
+      link.addEventListener("click", event => {
         playClickSound();
 
-        const rect = this.getBoundingClientRect();
         const ripple = document.createElement("span");
+        ripple.className = "click-effect";
+        ripple.style.left = event.clientX + "px";
+        ripple.style.top = event.clientY + "px";
 
-        ripple.className = "click-ripple";
-        ripple.style.width = "30px";
-        ripple.style.height = "30px";
-        ripple.style.left = (event.clientX - rect.left - 15) + "px";
-        ripple.style.top = (event.clientY - rect.top - 15) + "px";
+        document.body.appendChild(ripple);
 
-        this.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
       });
     });
