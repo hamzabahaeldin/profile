@@ -338,7 +338,40 @@ themeBtn.addEventListener('click', () => {
   const nextTheme = document.body.classList.contains('light') ? 'dark' : 'light';
   setTheme(nextTheme);
 });
-</script>
+<script>
+const themeBtn = document.getElementById('themeBtn');
 
+function setTheme(theme) {
+  if (theme === 'light') {
+    document.body.classList.add('light');
+    themeBtn.textContent = '🌙';
+  } else {
+    document.body.classList.remove('light');
+    themeBtn.textContent = '☀️';
+  }
+
+  document.querySelector('meta[name="theme-color"]').setAttribute(
+    'content',
+    theme === 'light' ? '#edf0f7' : '#101018'
+  );
+
+  try {
+    localStorage.setItem('profile-theme', theme);
+  } catch (error) {}
+}
+
+let currentTheme = 'dark';
+
+try {
+  currentTheme = localStorage.getItem('profile-theme') || 'dark';
+} catch (error) {}
+
+setTheme(currentTheme);
+
+themeBtn.onclick = function () {
+  const isLight = document.body.classList.contains('light');
+  setTheme(isLight ? 'dark' : 'light');
+};
+</script>
 </body>
 </html>
