@@ -1,628 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#10151c">
-<title>CAT CITY 3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101018">
+<title>حمزة بهاء الدين | حساباتي الرسمية</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{overflow:hidden;background:#10151c;font-family:Arial;color:white}
-#game{position:fixed;inset:0}
-canvas{display:block}
-.hud{
- position:fixed;top:15px;left:15px;right:15px;
- display:flex;justify-content:space-between;align-items:center;
- pointer-events:none;z-index:5
+:root {
+  --bg: #0b0c12;
+  --text: #ffffff;
+  --muted: #a5a6b5;
+  --glass: rgba(255,255,255,.075);
+  --border: rgba(255,255,255,.13);
+  --accent: #a78bfa;
+  --shadow: rgba(0,0,0,.25);
 }
-.logo{font-weight:900;letter-spacing:2px;font-size:17px}
-.logo span{color:#ffc447}
-.info{
- background:#111b28cc;padding:10px 15px;border-radius:12px;
- border:1px solid #ffffff30;font-size:12px
+
+body.light {
+  --bg: #edf0f7;
+  --text: #171824;
+  --muted: #666b7c;
+  --glass: rgba(255,255,255,.55);
+  --border: rgba(255,255,255,.8);
+  --accent: #7054c8;
+  --shadow: rgba(70,70,100,.12);
 }
-#score{color:#ffd15b;font-weight:bold}
-.controls{
- position:fixed;bottom:22px;left:0;right:0;
- display:flex;justify-content:space-between;align-items:end;
- padding:0 20px;z-index:10;pointer-events:none
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.group{display:flex;gap:9px;pointer-events:auto}
-.control{
- width:57px;height:57px;border-radius:17px;
- border:1px solid #ffffff60;background:#172638bb;
- color:white;font-size:23px;font-weight:bold;
- touch-action:none;backdrop-filter:blur(8px)
+
+body {
+  min-height: 100vh;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(125,90,220,.20), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(40,130,190,.17), transparent 35%),
+    var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+  transition: background .4s, color .4s;
 }
-.control:active{background:#e7a72c;color:#111}
-.jump{width:72px;height:72px;background:#e9aa32;color:#151515}
-.overlay{
- position:fixed;inset:0;background:#080d16df;
- display:flex;align-items:center;justify-content:center;
- z-index:20;text-align:center;padding:20px
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  animation: appear .8s ease both;
 }
-.panel{
- max-width:370px;width:100%;padding:30px 22px;
- background:#182332;border:1px solid #ffffff25;
- border-radius:24px;box-shadow:0 20px 70px #0008
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.panel h1{font-size:29px;margin-bottom:12px}
-.panel h1 span{color:#ffc447}
-.panel p{color:#bdc7d3;font-size:13px;line-height:1.8;margin:15px 0 22px}
-.start{
- padding:15px 28px;border:0;border-radius:12px;
- background:#ffc447;color:#171717;font-weight:900;font-size:15px
+
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--text);
+  font-size: 21px;
+  cursor: pointer;
+  transition: .25s;
 }
-.help{position:fixed;top:65px;left:15px;color:#fff9;font-size:10px;z-index:5}
-#message{position:fixed;top:48%;width:100%;text-align:center;color:#fff;font-weight:bold;pointer-events:none;z-index:5}
+
+.theme-btn:active {
+  transform: scale(.85) rotate(15deg);
+}
+
+.profile {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(167,139,250,.8);
+  padding: 4px;
+  background: var(--glass);
+  box-shadow: 0 10px 35px var(--shadow);
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+  margin-bottom: 27px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 13px 17px;
+  min-height: 68px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: transform .22s ease, background .22s ease, border-color .22s ease;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.12), transparent 80%);
+  transform: translateX(120%);
+  transition: transform .55s ease;
+}
+
+.social:hover::before {
+  transform: translateX(-120%);
+}
+
+.social:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.social:active {
+  transform: scale(.96);
+  background: rgba(167,139,250,.17);
+}
+
+.social-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: rgba(255,255,255,.09);
+  flex-shrink: 0;
+}
+
+.social-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: currentColor;
+}
+
+.social-info {
+  text-align: right;
+  flex: 1;
+}
+
+.social-info strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.social-info span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  direction: ltr;
+  text-align: right;
+}
+
+.arrow {
+  font-size: 19px;
+  color: var(--muted);
+  transition: transform .2s;
+}
+
+.social:hover .arrow {
+  transform: translateX(-4px);
+  color: var(--accent);
+}
+
+.instagram .social-icon { color: #e879b0; }
+.facebook .social-icon { color: #5297ff; }
+.snapchat .social-icon { color: #f5dc43; }
+.tiktok .social-icon { color: #45e6d0; }
+.pinterest .social-icon { color: #ed5365; }
+.x-social .social-icon { color: var(--text); }
+
+.footer {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 25px;
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: 23px; }
+  .social { padding: 11px 13px; }
+}
 </style>
 </head>
 
 <body>
-<div id="game"></div>
 
-<div class="hud">
- <div class="logo">CAT <span>CITY 3D</span></div>
- <div class="info">DISTANCE: <span id="score">0</span> m</div>
-</div>
-<div class="help">WASD / ARROWS TO MOVE · SPACE TO JUMP</div>
+<button class="theme-btn" id="themeBtn" aria-label="تغيير المظهر" title="تغيير المظهر">☀️</button>
 
-<div id="message"></div>
+<main class="container">
 
-<div class="controls">
- <div class="group">
-  <button class="control" data-key="left">◀</button>
-  <button class="control" data-key="right">▶</button>
- </div>
- <div class="group">
-  <button class="control" data-key="back">▼</button>
-  <button class="control" data-key="forward">▲</button>
-  <button class="control jump" data-key="jump">JUMP</button>
- </div>
-</div>
+  <img class="profile" src="profile.png.png" alt="صورة حمزة بهاء الدين"
+       onerror="this.style.background='linear-gradient(135deg,#7054c8,#2489a8)'; this.removeAttribute('src');">
 
-<div class="overlay" id="overlay">
- <div class="panel">
-  <h1>CAT <span>CITY 3D</span></h1>
-  <p>
-   Explore the city as a crazy street cat.<br>
-   Drive through the streets, dodge traffic and explore the world!
-  </p>
-  <button class="start" id="start">ENTER THE CITY</button>
- </div>
-</div>
+  <h1>حمزة بهاء الدين</h1>
+  <p class="subtitle">مرحباً بك في مساحتي الرقمية</p>
 
-<script type="importmap">
-{
- "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
- }
-}
-</script>
+  <section class="links">
 
-<script type="module">
-import * as THREE from "three";
+    <a class="social instagram" href="https://www.instagram.com/hamza_bahaeldin?psln=MTZ4bjR6aWsycGF1OA==" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>Instagram</strong>
+        <span>@hamza_bahaeldin</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-const container=document.getElementById("game");
+    <a class="social facebook" href="https://www.facebook.com/profile.php?id=61593354366407" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M13.5 22v-9h3l.5-3.5h-3.5V7.3c0-1 .3-1.8 1.8-1.8H17V2.3c-.3 0-1.5-.2-2.8-.2-2.8 0-4.7 1.7-4.7 4.9v2.5H6.5V13h3v9h4z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>Facebook</strong>
+        <span>صفحتي الشخصية</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x91b9d0);
-scene.fog=new THREE.Fog(0x91b9d0,45,180);
+    <a class="social snapchat" href="https://www.snapchat.com/add/ebrezz?share_id=iEImKBMFEJs&locale=ar-EG-u-nu-arab" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-3.1 0-4.8 2.3-4.8 5.4 0 1 .2 2.1.2 3.1 0 .7-.4 1.2-1.3 1.6-.6.3-1.2.4-1.8.5-.5.1-.7.5-.4.9.3.5 1 .7 1.7.8.5.1.8.3.8.6 0 .5-.5 1.1-1.5 1.6-.8.4-1.5.6-1.5 1.1 0 .6 1.2.9 2.3 1.1.5.1.8.4 1 .9.1.4.5.6 1 .6.6 0 1.4-.3 2.4-.3.8 0 1.4.2 1.9.5.5.3 1.1.5 1.9.5s1.4-.2 1.9-.5c.5-.3 1.1-.5 1.9-.5 1 0 1.8.3 2.4.3.5 0 .9-.2 1-.6.2-.5.5-.8 1-.9 1.1-.2 2.3-.5 2.3-1.1 0-.5-.7-.7-1.5-1.1-1-.5-1.5-1.1-1.5-1.6 0-.3.3-.5.8-.6.7-.1 1.4-.3 1.7-.8.3-.4.1-.8-.4-.9-.6-.1-1.2-.2-1.8-.5-.9-.4-1.3-.9-1.3-1.6 0-1 .2-2.1.2-3.1C16.8 4.3 15.1 2 12 2z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>Snapchat</strong>
+        <span>@ebrezz</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-const camera=new THREE.PerspectiveCamera(
- 65,innerWidth/innerHeight,0.1,500
-);
-camera.position.set(0,6,12);
+    <a class="social tiktok" href="https://www.tiktok.com/@hmzawy_sd" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M19.6 7.2a6.5 6.5 0 0 1-4-1.4v8.1a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.2.1v3.4a2.8 2.8 0 1 0 1.7 2.6V2h3.3c.3 2 1.8 3.6 3.9 3.9v1.3z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>TikTok</strong>
+        <span>@hmzawy_sd</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-const renderer=new THREE.WebGLRenderer({
- antialias:true,
- powerPreference:"high-performance"
-});
-renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
-renderer.shadowMap.enabled=true;
-renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.1;
-container.appendChild(renderer.domElement);
+    <a class="social pinterest" href="https://pin.it/6tgYQH8CJ" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.6 19.3c0-.8 0-1.8.2-2.6l1.3-5.4s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.8 0 1.2.6 1.2 1.4 0 .9-.6 2.2-.9 3.4-.3 1 .5 1.8 1.5 1.8 1.8 0 3.2-2.4 3.2-5.2 0-2.2-1.5-3.8-4.1-3.8-3 0-4.9 2.2-4.9 4.6 0 .8.2 1.5.6 2 .2.2.2.3.1.6l-.2.8c-.1.3-.3.4-.6.3-1.3-.5-1.9-1.9-1.9-3.4 0-2.5 2.1-5.5 6.4-5.5 3.4 0 5.7 2.5 5.7 5.2 0 3.6-2 6.3-5 6.3-1 0-2-.6-2.3-1.2l-.7 2.7c-.2.8-.7 1.7-1 2.3A10 10 0 1 0 12 2z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>Pinterest</strong>
+        <span>حسابي على Pinterest</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-// LIGHTING
-scene.add(new THREE.HemisphereLight(0xd9efff,0x5c5142,2));
+    <a class="social x-social" href="https://x.com/v24vb" target="_blank" rel="noopener noreferrer">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.8 2h6.4l4.5 6.8L18.9 2zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20z"/></svg>
+      </div>
+      <div class="social-info">
+        <strong>X (Twitter)</strong>
+        <span>@v24vb</span>
+      </div>
+      <span class="arrow">←</span>
+    </a>
 
-const sun=new THREE.DirectionalLight(0xffe1b0,3);
-sun.position.set(-30,55,25);
-sun.castShadow=true;
-sun.shadow.mapSize.set(1024,1024);
-sun.shadow.camera.left=-45;
-sun.shadow.camera.right=45;
-sun.shadow.camera.top=45;
-sun.shadow.camera.bottom=-45;
-scene.add(sun);
+  </section>
 
-// MATERIALS
-const mat=(color,roughness=.85)=>new THREE.MeshStandardMaterial({
- color,roughness
-});
+  <footer class="footer">
+    © 2026 Hamza Bahaeldin · جميع الحقوق محفوظة
+  </footer>
 
-const roadMat=mat(0x333941);
-const sidewalkMat=mat(0xaaa9a1);
-const grassMat=mat(0x627c50);
-const whiteMat=mat(0xe8e5d8);
-const blackMat=mat(0x20242b);
-const catMat=mat(0x778496);
-const bellyMat=mat(0xe3dcd2);
-const pinkMat=mat(0xd78f91);
-const eyeMat=mat(0xffffff);
-const pupilMat=mat(0x172e43);
+</main>
 
-// BASIC OBJECT
-function box(parent,w,h,d,material,x,y,z){
- const mesh=new THREE.Mesh(
-  new THREE.BoxGeometry(w,h,d),material
- );
- mesh.position.set(x,y,z);
- mesh.castShadow=true;
- mesh.receiveShadow=true;
- parent.add(mesh);
- return mesh;
+<script>
+const themeBtn = document.getElementById('themeBtn');
+
+function setTheme(theme) {
+  document.body.classList.toggle('light', theme === 'light');
+  themeBtn.textContent = theme === 'light' ? '🌙' : '☀️';
+  document.querySelector('meta[name="theme-color"]').content =
+    theme === 'light' ? '#edf0f7' : '#101018';
+  try {
+    localStorage.setItem('profile-theme', theme);
+  } catch (e) {}
 }
 
-function sphere(parent,x,y,z,sx,sy,sz,material){
- const mesh=new THREE.Mesh(
-  new THREE.SphereGeometry(1,16,12),material
- );
- mesh.position.set(x,y,z);
- mesh.scale.set(sx,sy,sz);
- mesh.castShadow=true;
- parent.add(mesh);
- return mesh;
-}
-
-// CITY GROUND
-box(scene,200,.3,400,grassMat,0,-.3,-100);
-
-// MAIN ROAD
-box(scene,16,.12,400,roadMat,0,-.08,-100);
-
-// SIDEWALKS
-box(scene,4,.2,400,sidewalkMat,-10,.0,-100);
-box(scene,4,.2,400,sidewalkMat,10,.0,-100);
-
-// ROAD LINES
-for(let z=60;z>-350;z-=12){
- box(scene,.16,.025,5,whiteMat,0,.0,z);
-}
-
-// CITY BUILDINGS
-const buildingColors=[
- 0xb6a18a,0x9aabb4,0xc1b9a6,0x858f99,
- 0xb58d79,0x9b9d86,0xbbb6ad
-];
-
-for(let side of [-1,1]){
- for(let i=0;i<45;i++){
-  const z=35-i*9;
-  const width=5+Math.random()*5;
-  const height=8+Math.random()*24;
-  const depth=6+Math.random()*7;
-  const x=side*(15+Math.random()*5);
-
-  const building=new THREE.Group();
-  building.position.set(x,0,z);
-  scene.add(building);
-
-  const color=buildingColors[
-   Math.floor(Math.random()*buildingColors.length)
-  ];
-
-  box(building,width,height,depth,mat(color),0,height/2,0);
-
-  // Windows
-  const windowMat=mat(
-   Math.random()>.5?0x8fc4d4:0xe8d6a0,.35
-  );
-
-  for(let floor=0;floor<Math.floor(height/3);floor++){
-   for(let col=0;col<2;col++){
-    box(building,1.05,1.4,.08,windowMat,
-     (col-.5)*width*.48,
-     2+floor*2.7,
-     depth/2+.05
-    );
-   }
-  }
-
-  // Rooftop
-  box(building,width*.4,.5,depth*.5,
-   mat(0x55565a),0,height+.25,0
-  );
- }
-}
-
-// STREET TREES
-function makeTree(x,z){
- const g=new THREE.Group();
- g.position.set(x,0,z);
- scene.add(g);
- const trunk=mat(0x755037);
- const leaves=mat(0x376c48);
-
- const stem=new THREE.Mesh(
-  new THREE.CylinderGeometry(.18,.28,2.3,8),trunk
- );
- stem.position.y=1.15;
- stem.castShadow=true;
- g.add(stem);
-
- const crown=new THREE.Mesh(
-  new THREE.SphereGeometry(1.4,10,8),leaves
- );
- crown.position.y=3;
- crown.scale.set(1,1.2,1);
- crown.castShadow=true;
- g.add(crown);
-}
-
-for(let z=45;z>-300;z-=17){
- makeTree(-13,z);
- makeTree(13,z-7);
-}
-
-// CAT CHARACTER
-const cat=new THREE.Group();
-scene.add(cat);
-
-const body=sphere(cat,0,1.05,0,.55,.78,.42,catMat);
-sphere(cat,0,1.05,-.27,.38,.62,.18,bellyMat);
-
-// HEAD
-sphere(cat,0,2.05,-.05,.68,.62,.55,catMat);
-
-// EARS
-function ear(x){
- const e=new THREE.Mesh(
-  new THREE.ConeGeometry(.28,.72,4),catMat
- );
- e.position.set(x,2.68,-.08);
- e.rotation.z=x>0?-.25:.25;
- e.castShadow=true;
- cat.add(e);
-
- const inner=new THREE.Mesh(
-  new THREE.ConeGeometry(.13,.4,4),pinkMat
- );
- inner.position.set(x,2.69,-.17);
- cat.add(inner);
-}
-ear(-.43);
-ear(.43);
-
-// EYES
-sphere(cat,-.25,2.12,-.53,.19,.24,.1,eyeMat);
-sphere(cat,.25,2.12,-.53,.19,.24,.1,eyeMat);
-sphere(cat,-.22,2.1,-.62,.075,.13,.05,pupilMat);
-sphere(cat,.28,2.1,-.62,.075,.13,.05,pupilMat);
-
-// NOSE
-sphere(cat,0,1.91,-.64,.1,.07,.08,pinkMat);
-
-// MUZZLE
-sphere(cat,-.14,1.87,-.59,.17,.12,.1,bellyMat);
-sphere(cat,.14,1.87,-.59,.17,.12,.1,bellyMat);
-
-// TAIL
-const tail=new THREE.Mesh(
- new THREE.CatmullRomCurve3([
-  new THREE.Vector3(0,.8,.3),
-  new THREE.Vector3(-.8,1.1,.6),
-  new THREE.Vector3(-1.1,1.7,.3),
-  new THREE.Vector3(-.8,2,.1)
- ]).getPoints(24).length>0
- ?new THREE.TubeGeometry(
-   new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0,.8,.3),
-    new THREE.Vector3(-.8,1.1,.6),
-    new THREE.Vector3(-1.1,1.7,.3),
-    new THREE.Vector3(-.8,2,.1)
-   ]),24,.11,8,false
- ):new THREE.BoxGeometry(),
- catMat
-);
-cat.add(tail);
-
-// LEGS
-const legs=[];
-for(let x of [-.3,.3]){
- for(let z of [-.23,.23]){
-  const leg=box(cat,.22,.7,.23,catMat,x,.42,z);
-  legs.push(leg);
- }
-}
-
-// CARS
-const cars=[];
-const carColors=[0xc43e36,0x276eae,0xd5a52e,0xeeeeea,0x303945,0x39845e];
-
-function makeCar(lane,z,trafficSpeed){
- const g=new THREE.Group();
- scene.add(g);
-
- const color=mat(carColors[
-  Math.floor(Math.random()*carColors.length)
- ]);
-
- box(g,2.2,.7,4,color,0,.8,0);
- box(g,1.75,.7,2.1,mat(0x9dc9d5,.3),0,1.45,-.15);
-
- // Windows divider
- box(g,.06,.6,.08,blackMat,0,1.45,-.15);
-
- // Wheels
- for(let x of [-1.12,1.12]){
-  for(let zz of [-1.25,1.25]){
-   const wheel=new THREE.Mesh(
-    new THREE.CylinderGeometry(.38,.38,.18,12),
-    blackMat
-   );
-   wheel.rotation.z=Math.PI/2;
-   wheel.position.set(x,.45,zz);
-   g.add(wheel);
-  }
- }
-
- // Lights
- for(let x of [-.7,.7]){
-  box(g,.35,.2,.06,mat(0xfff0b5),x,.85,-2.02);
-  box(g,.35,.2,.06,mat(0xe33b34),x,.85,2.02);
- }
-
- g.position.set(lane,.0,z);
- cars.push({group:g,speed:trafficSpeed});
-}
-
-for(let i=0;i<12;i++){
- makeCar(i%2===0?-4.2:4.2,-35-i*25,4+Math.random()*3);
-}
-
-// PEDESTRIANS
-const pedestrians=[];
-
-function makePerson(x,z){
- const g=new THREE.Group();
- scene.add(g);
- sphere(g,0,1.55,0,.32,.32,.3,mat(0xd6a47f));
- box(g,.55,.85,.3,mat(
-  [0xb84d43,0x396caa,0xd4a638,0x527c5b][
-   Math.floor(Math.random()*4)
-  ]
- ),0,.95,0);
- box(g,.18,.65,.2,blackMat,-.16,.22,0);
- box(g,.18,.65,.2,blackMat,.16,.22,0);
- g.position.set(x,0,z);
- pedestrians.push(g);
-}
-for(let i=0;i<15;i++){
- makePerson(i%2===0?-12:12,-i*22-10);
-}
-
-// GAME STATE
-let keys={};
-let started=false;
-let distance=0;
-let verticalVelocity=0;
-let jumpHeight=0;
-let gameSpeed=0;
-let clock=new THREE.Clock();
-
-function setKey(name,value){
- keys[name]=value;
-}
-
-document.querySelectorAll("[data-key]").forEach(button=>{
- const key=button.dataset.key;
-
- button.addEventListener("pointerdown",e=>{
-  e.preventDefault();
-  button.setPointerCapture(e.pointerId);
-  setKey(key,true);
- });
- button.addEventListener("pointerup",()=>setKey(key,false));
- button.addEventListener("pointercancel",()=>setKey(key,false));
- button.addEventListener("lostpointercapture",()=>setKey(key,false));
-});
-
-window.addEventListener("keydown",e=>{
- const k=e.key.toLowerCase();
- keys[k]=true;
- if(k===" "||k==="arrowup")e.preventDefault();
-});
-window.addEventListener("keyup",e=>{
- keys[e.key.toLowerCase()]=false;
-});
-
-// CAMERA
-const cameraTarget=new THREE.Vector3();
-const lookTarget=new THREE.Vector3();
-
-function updateCamera(){
- cameraTarget.set(cat.position.x*.35,5.5,cat.position.z+10);
- camera.position.lerp(cameraTarget,.075);
-
- lookTarget.set(cat.position.x*.25,1.5,cat.position.z-10);
- camera.lookAt(lookTarget);
-}
-
-// MOVEMENT
-function updatePlayer(dt){
- const forward=keys.forward||keys.w||keys.arrowup;
- const back=keys.back||keys.s||keys.arrowdown;
- const left=keys.left||keys.a||keys.arrowleft;
- const right=keys.right||keys.d||keys.arrowright;
-
- let direction=0;
- if(left)direction-=1;
- if(right)direction+=1;
-
- cat.position.x+=direction*dt*8;
- cat.position.x=THREE.MathUtils.clamp(cat.position.x,-6,6);
-
- let move=0;
- if(forward)move=1;
- if(back)move=-.6;
-
- gameSpeed=THREE.MathUtils.lerp(
-  gameSpeed,move?move*10:5,dt*2
- );
-
- cat.position.z-=gameSpeed*dt;
- distance+=Math.max(0,gameSpeed)*dt;
-
- if((keys.jump||keys[" "]||keys.arrowup&&back===false&&keys.upJump)&&jumpHeight===0){
-  if(!keys.jumpLock){
-   verticalVelocity=9;
-   keys.jumpLock=true;
-  }
- }
- if(!keys.jump&&!keys[" "]){
-  keys.jumpLock=false;
- }
-
- verticalVelocity-=22*dt;
- jumpHeight+=verticalVelocity*dt;
-
- if(jumpHeight<0){
-  jumpHeight=0;
-  verticalVelocity=0;
- }
-
- cat.position.y=jumpHeight;
-
- const running=gameSpeed>1;
- const t=clock.elapsedTime;
-
- legs.forEach((leg,i)=>{
-  leg.rotation.x=running?Math.sin(t*13+i*Math.PI)*.75:0;
- });
- tail.rotation.x=Math.sin(t*4)*.2;
- cat.rotation.z=THREE.MathUtils.lerp(cat.rotation.z,-direction*.12,dt*5);
-}
-
-// WORLD MOVEMENT
-function updateWorld(dt){
- const playerZ=cat.position.z;
-
- // Cars travel through the road
- cars.forEach(car=>{
-  car.group.position.z+=car.speed*dt;
-
-  if(car.group.position.z>playerZ+30){
-   car.group.position.z=playerZ-180-Math.random()*100;
-   car.group.position.x=Math.random()>.5?-4.2:4.2;
-  }
- });
-
- // People move along sidewalks
- pedestrians.forEach(p=>{
-  p.position.z+=3*dt;
-  if(p.position.z>playerZ+20){
-   p.position.z=playerZ-160-Math.random()*100;
-  }
- });
-
- // Infinite scenery illusion
- roadParts.forEach(part=>{
-  if(part.position.z>playerZ+40){
-   part.position.z-=360;
-  }
- });
-}
-
-// Repeating road marks
-const roadParts=[];
-for(let i=0;i<30;i++){
- const line=box(scene,.16,.025,5,whiteMat,0,.0,50-i*12);
- roadParts.push(line);
-}
-
-// COLLISION
-function checkCollision(){
- for(const car of cars){
-  const dx=Math.abs(car.group.position.x-cat.position.x);
-  const dz=Math.abs(car.group.position.z-cat.position.z);
-  if(dx<1.65&&dz<2.5&&jumpHeight<1.5){
-   showCrash();
-   return;
-  }
- }
-}
-
-// CRASH
-function showCrash(){
- started=false;
- document.getElementById("overlay").style.display="flex";
- document.querySelector(".panel").innerHTML=`
-  <h1>GAME <span>OVER</span></h1>
-  <p>You explored ${Math.floor(distance)} meters.<br>Ready for another run?</p>
-  <button class="start" id="restart">PLAY AGAIN</button>
- `;
- document.getElementById("restart").onclick=startGame;
-}
-
-// START
-function startGame(){
- distance=0;
- gameSpeed=5;
- jumpHeight=0;
- verticalVelocity=0;
- cat.position.set(0,0,0);
- cat.rotation.set(0,0,0);
-
- cars.forEach((car,i)=>{
-  car.group.position.z=-35-i*25;
- });
- pedestrians.forEach((p,i)=>{
-  p.position.z=-i*22-10;
- });
-
- document.getElementById("score").textContent="0";
- document.getElementById("overlay").style.display="none";
- started=true;
- clock.start();
-}
-
-document.getElementById("start").onclick=startGame;
-
-// MAIN LOOP
-function animate(){
- requestAnimationFrame(animate);
-
- const dt=Math.min(clock.getDelta(),.04);
-
- if(started){
-  updatePlayer(dt);
-  updateWorld(dt);
-  updateCamera();
-  checkCollision();
-  document.getElementById("score").textContent=
-   Math.floor(distance);
- }else{
-  // Idle camera
-  camera.lookAt(0,1,-10);
- }
-
- renderer.render(scene,camera);
-}
-
-camera.position.set(0,6,12);
-camera.lookAt(0,1,-10);
-animate();
-
-window.addEventListener("resize",()=>{
- camera.aspect=innerWidth/innerHeight;
- camera.updateProjectionMatrix();
- renderer.setSize(innerWidth,innerHeight);
+let savedTheme = 'dark';
+try {
+  savedTheme = localStorage.getItem('profile-theme') || 'dark';
+} catch (e) {}
+
+setTheme(savedTheme);
+
+themeBtn.addEventListener('click', () => {
+  const nextTheme = document.body.classList.contains('light') ? 'dark' : 'light';
+  setTheme(nextTheme);
 });
 </script>
+
 </body>
 </html>
